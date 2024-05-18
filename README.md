@@ -35,7 +35,7 @@ Possiamo notare che mancano molti valori nella colonna n_seasons, questo è perc
 # Conteggio dei Film e Serie TV
 
 # Grafico a Barre per il tipo di programmi
-![bar plot](/assets/barplot)
+![bar plot](/assets/barplot.png)
 ![pie chart](/assets/piechart.png)
 
 
