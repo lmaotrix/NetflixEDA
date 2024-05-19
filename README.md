@@ -1,5 +1,9 @@
 # Netflix-EDA
 
+# Preparazione del Dataset
+La preparazione del [Dataset](https://www.kaggle.com/datasets/rahulvyasm/netflix-movies-and-tv-shows) è stata svolta prima utilizzando Python, usato per suddividere le colonne 'cast', 'country' e 'listed_in' da stringhe separate da virgole in liste e la successiva espansione di queste liste in righe separate, creando un dataset più dettagliato.
+In R, il dataset originale viene pulito rimouvendo colonne inutili e sostituendo stringhe vuote con valori NA. Le righe con valori mancanti vengono eliminate e vengono eseguite ulteriori trasformazioni, come la pulizia degli spazi bianchi, la conversione del formato delle date, e la creazione di colonne specifiche per distinguere tra film e Show TV. Questo processo assicura che i dati siano strutturati, puliti e pronti per ulteriori analisi.
+
 # Descrizione dei dati del Dataset di Netflix
 
     str(data)
@@ -30,11 +34,12 @@ il comando citato sopra ci dice che il dataset è composto da 128584 osservazion
 
 Possiamo notare che mancano molti valori nella colonna n_seasons, questo è perchè come vedremo successivamente la maggior parte delle osservazioni nel Dataset sono di tipo Film (1).
 
-# Missing Map
-![missing map](/assets/missingnessMap.png)
+
 # Conteggio dei Film e Serie TV
 
 # Grafico a Barre per il tipo di programmi
+La maggior parte dei titoli nel dataset sono film, con un valore medio per la variabile 'movie' di circa 0.9678, indicando che la stragrande maggioranza dei record (circa il 96.78%) sono film (1) rispetto a serie TV (0). La variabile 'movie' ha un valore minimo di 0 e un valore massimo di 1, con il primo quartile, la mediana e il terzo quartile tutti pari a 1, evidenziando ulteriormente la predominanza dei film nel Dataset.
+
 ![bar plot](/assets/barplot.png)
 ![pie chart](/assets/piechart.png)
 
@@ -51,6 +56,9 @@ Possiamo notare che mancano molti valori nella colonna n_seasons, questo è perc
 la tabella mostra che ci sono nettamente più film che serie TV
 
 # Distribuzione della Durata dei film 
+
+La durata dei film nel Dataset presenta una distribuzione abbastanza uniforme, con la maggior parte dei film che si aggirano intorno ai 102.70 minuti in media. La mediana della durata è di 101 minuti, indicando che la metà dei film ha una durata inferiore a questo valore. La moda, ossia il valore più frequente, è di 94 minuti. L'intervallo della durata dei film varia da un minimo di 8 a un massimo di 253 minuti, suggerendo una vasta gamma di lunghezze. L'intervallo interquartile è di 28 minuti, indicando che il 50% dei film ha una durata compresa tra 86 e 114 minuti. La deviazione standerd è di circa 25.96 minuti, suggerendo una moderata dispersione dei dati intorno alla media. Infine, la varianza è di circa 673.95, indicando la quantità di dispersione dei dati rispetto alla media, elevata al quadrato.
+
 `> data.1 <- data %>% distinct(show_id, .keep_all = TRUE)`
 
 `> data.1 %>%
@@ -84,9 +92,57 @@ In sintesi, la diversità dei paesi nella top 20 non solo mette in mostra la pop
 
 # GRAFICO A BARRE GENERE VS TITOLI(MOVIES)
 
-![image](/assets/)
+![image](/assets/barplot3.png)
 
+Table: Top 30 Movie Genres
+
+|listed_in              |n.titles|
+|:---------------------- |------:|
+|Dramas                  | 1518  |
+|Comedies                | 1127  |
+|Action & Adventure       |  806 |
+|Children & Family Movies |  469 |
+|Documentaries            |  372 |
+|Stand-Up Comedy          |  286 |
+|Horror Movies            |  261 |
+|International Movies     |  109 |
+|Classic Movies           |   73 |
+|Thrillers                |   62 |
+|Independent Movies       |   20 |
+|Movies                   |   20 |
+|Anime Features           |   18 |
+|Music & Musicals         |   15 |
+|Sci-Fi & Fantasy         |   13 |
+|Cult Movies              |   12 |
+|Romantic Movies          |    3 |
+|Drama                    |    1 |
+|LGBTQ Movies             |    1 |
+
+I dati offrono una panoramica completa dei generi cinematografici presenti nel dataset. Tra questi, i 'Drammi' emergono come la categoria più diffusa, con un totale di 1518 titoli, seguiti a stretto giro dalle 'Commedie' con 1127 titoli. 'Azione & Avventura' si posiziona al terzo posto con 806 titoli, mentre 'Film per Bambini e Famiglie' e 'Documentari' garantiscono rispettivamente 469 e 372 titoli. Generi come 'Commedie Stand-Up', 'Film Horror' e 'Film Internazionali' occupano anche una posizione di rilievo nella lista. Interessante notare che 'Drammi' e 'Film' compaiono come voci autonome, forse indicando una classificazione più ampia. Generi come 'Film Romantici' e 'Film LGBTQ' sono relativamente rari, ognuno con un solo titolo. Questa diversità di generi offre agli spettatori una vasta gamma di scelte, che soddisfano diverse preferenze e gusti."
 
 # GRAFICO A BARRE GENERE VS TITOLI(TV SHOWS)
 
-![image](/assets/)
+![image](/assets/barplot4.png)
+
+Table: Top 30 TV Show Genres
+
+|listed_in                    |  n|
+|:----------------------------|--:|
+|International TV Shows       | 44|
+|Crime TV Shows               | 32|
+|British TV Shows             | 20|
+|Anime Series                 | 10|
+|Kids' TV                     | 10|
+|Stand-Up Comedy & Talk Shows |  7|
+|Docuseries                   |  6|
+|TV Shows                     |  5|
+|TV Action & Adventure        |  2|
+|TV Comedies                  |  2|
+|Classic & Cult TV            |  1|
+|Reality TV                   |  1|
+|Romantic TV Shows            |  1|
+|Sci-fi                       |  1|
+|TV Dramas                    |  1|
+|TV Horror                    |  1|
+
+I dati mostrano una panoramica dei generi di programmi TV più popolari presenti nel dataset. 'Programmi TV Internazionali' dominano la lista con 44 titoli, seguiti da 'Programmi TV Crimine' con 32 titoli. 'Programmi TV Britannici', 'Serie Anime' e 'Programmi TV per Bambini' si collocano anche tra i primi posti della classifica con 20, 10 e 10 titoli rispettivamente. Altri generi rappresentati includono 'Commedie Stand-Up e Talk Show', 'Docuserie' e 'Programmi TV d'Azione e Avventura'. Alcuni generi come 'TV Drammi', 'TV Horror' e 'TV Romantici' sono meno rappresentati, ognuno con solo un titolo. Questa varietà di generi televisivi offre agli spettatori una vasta gamma di opzioni, dalle serie internazionali ai programmi per bambini, garantendo una varietà di intrattenimento adatta a diversi gusti e interessi.
