@@ -162,6 +162,8 @@ La maggior parte dei contenuti nel dataset è classificata come TV-MA, con oltre
 
 # CORRELAZIONE TRA DURATA DEL FILM E DATA DI USCITA
 
+La maggior parte dei film nel dataset è stata pubblicata dopo l'anno 2000, con una durata che varia principalmente tra 50 e 150 minuti. Le durate dei film più recenti tendono a concentrarsi intorno ai 100 minuti. Prima degli anni '80, c'è una maggiore variazione nelle durate, con alcuni film molto brevi e altri particolarmente lunghi. Dal 2000 in poi, la distribuzione della durata dei film diventa più uniforme, evidenziando una standardizzazione nel tempo di visione. Questo suggerisce che, con il passare degli anni, i film hanno raggiunto una durata più omogenea, mentre in passato c'era una maggiore variabilità.
+
 ![image](/assets/dispersione.png)
 
-La maggior parte dei film nel dataset è stata pubblicata dopo l'anno 2000, con una durata che varia principalmente tra 50 e 150 minuti. Le durate dei film più recenti tendono a concentrarsi intorno ai 100 minuti. Prima degli anni '80, c'è una maggiore variazione nelle durate, con alcuni film molto brevi e altri particolarmente lunghi. Dal 2000 in poi, la distribuzione della durata dei film diventa più uniforme, evidenziando una standardizzazione nel tempo di visione. Questo suggerisce che, con il passare degli anni, i film hanno raggiunto una durata più omogenea, mentre in passato c'era una maggiore variabilità.
+Inoltre è importante menzionare che una correlazione di -0,21 tra la durata in minuti e l'anno di pubblicazione indica una debole relazione negativa, suggerendo che le pubblicazioni più recenti tendono leggermente ad avere una durata inferiore
