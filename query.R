@@ -64,7 +64,10 @@ fig1
 
 #----------------------------DISTRIBUZIONE DEI FILM---------------------------------
 
-data.1 <- data %>% distinct(show_id, .keep_all = TRUE)
+data.1 <- data %>% 
+  distinct(show_id, .keep_all = TRUE) %>%
+  mutate(duration = as.numeric(duration)) %>%
+  filter(movie == 1)
 
 data.1 %>%
   filter(movie == 1) %>%
@@ -96,16 +99,12 @@ print(paste("IQR:", iqr_duration))
 print(paste("Deviazione Standard:", sd_duration))
 print(paste("Varianza:", var_duration))
 
-data %>%
-  distinct(show_id, .keep_all = TRUE) %>%
-  filter(movie == "1") %>%
-  mutate(duration_in_mins = as.numeric(gsub("[^0-9]", "", duration))) %>%
-  ggplot() +
-  geom_density(aes(x = duration_in_mins)) +
-  labs(title = "Distribuzione della Durata dei Film", subtitle = "in Minuti")
 
-
-
+# Istogramma - Distribuzione della Durata dei Film
+ggplot(data.1, aes(x = duration)) +
+  geom_histogram(fill = "#1E90FF", bins = 40) +
+  labs(x = "Durata (in minuti)", y = "Frequenza",
+       title = "Distribuzione della Durata dei Film")
 
 #---------------------GRAFICO A BARRE FILM VS PAESI-------------------------
 
@@ -152,6 +151,7 @@ movies_genre_count <- movies_data %>%
   head(30)
 
 kable(movies_genre_count, caption = "Top 30 Movie Genres")
+
 #-------------------GRAFICO A BARRE GENERE VS TITOLI(TV SHOWS)--------------------
 
 library(knitr)
@@ -177,6 +177,67 @@ tvshows_genre_count <- tvshows_data %>%
   arrange(desc(n)) %>%
   head(30)
 kable(tvshows_genre_count, caption = "Top 30 TV Show Genres")
+
+#-------------------TOP 5 REGISTI-----------------------------------------------
+
+data %>% 
+  distinct(show_id, .keep_all = TRUE) %>%
+  group_by(director) %>%
+  summarise(n=n()) %>%
+  arrange(desc(n)) %>%
+  head(5)
+
+#-------------------TOP 5 ATTORI/ATTRICI----------------------------------------
+
+data %>%
+  distinct(show_id, .keep_all = TRUE) %>%
+  group_by(cast) %>%
+  summarise(n=n()) %>%
+  arrange(desc(n)) %>%
+  head(5)
+
+#-------------------DIAGRAMMA A BARRE - FREQUENZA DEI CONTENUTI PER ANNO--------
+
+freq_by_year <- data %>% 
+  distinct(show_id, .keep_all = TRUE) %>%
+  group_by(release_year) %>%
+  summarise(count=n()) %>%
+  arrange(release_year, desc(count))
+
+library(ggplot2)
+ggplot(freq_by_year, aes(x = release_year, y = count)) +
+  geom_bar(stat = "identity", fill = "#FF5733") +
+  labs(x = "Anno di Pubblicazione", y = "Frequenza",
+       title = "Frequenza dei Contenuti per Anno")
+
+#-------------------DIAGRAMMA A BARRE - FREQUENZA DEI RATING--------------------
+
+freq_rating <- data %>% 
+  distinct(show_id, .keep_all = TRUE) %>%
+  group_by(rating) %>%
+  summarise(count=n())
+
+ggplot(freq_rating, aes(x = reorder(rating, -count), y = count)) +
+  geom_bar(stat = "identity", fill = "#6E8B3D") +
+  labs(x = "Fascia d'Età", y = "Frequenza",
+       title = "Frequenza dei Contenuti per Fascia d'Età")
+
+#-------------------CORRELAZIONE TRA DURATA DEL FILM E DATA DI USCITA-----------
+
+data.2 <- data %>% 
+  distinct(show_id, .keep_all = TRUE) %>%
+  mutate(duration = as.numeric(duration)) %>%
+  filter(movie == 1)
+
+# Scatter plot
+ggplot(data.2, aes(x = release_year, y = duration)) +
+  geom_point(color = "#9932CC") +
+  labs(x = "Anno di Pubblicazione", y = "Durata",
+       title = "Anno di Pubblicazione vs Durata")
+
+# Correlazione di Pearson
+cor(data.2$release_year, data.2$duration, method = "pearson")
+
 #-------------------------------------------------------------------------------
 # remove all variables from the environment
 rm(list=ls())

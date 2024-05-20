@@ -14,7 +14,7 @@ il comando citato sopra ci dice che il dataset è composto da 128584 osservazion
 - Cast: Gli attori e le attrici che sono stati scelti per il programma
 - Country: I paesi dove il programma è stato prodotto
 - Date_added: Il giorno in cui il programma è stato aggiunto alla piattaforma di streaming Netflix
-- Release_year: Il giorno in cui il programma è stato rilasciato al pubblico
+- Release_year: L'anno in cui il programma è stato rilasciato al pubblico
 - Rating: Fascia d'età del programma
 - Duration: Durata del programma in minuti
 - Listed_in: Il genere del programma
@@ -57,7 +57,7 @@ la tabella mostra che ci sono nettamente più film che serie TV
 
 # Distribuzione della Durata dei film 
 
-La durata dei film nel Dataset presenta una distribuzione abbastanza uniforme, con la maggior parte dei film che si aggirano intorno ai 102.70 minuti in media. La mediana della durata è di 101 minuti, indicando che la metà dei film ha una durata inferiore a questo valore. La moda, ossia il valore più frequente, è di 94 minuti. L'intervallo della durata dei film varia da un minimo di 8 a un massimo di 253 minuti, suggerendo una vasta gamma di lunghezze. L'intervallo interquartile è di 28 minuti, indicando che il 50% dei film ha una durata compresa tra 86 e 114 minuti. La deviazione standerd è di circa 25.96 minuti, suggerendo una moderata dispersione dei dati intorno alla media. Infine, la varianza è di circa 673.95, indicando la quantità di dispersione dei dati rispetto alla media, elevata al quadrato.
+La durata dei film nel Dataset presenta una distribuzione abbastanza uniforme, con la maggior parte dei film che si aggirano intorno ai 102.70 minuti in media. La mediana della durata è di 101 minuti, indicando che la metà dei film ha una durata inferiore a questo valore. La moda, ossia il valore più frequente, è di 94 minuti. L'intervallo della durata dei film varia da un minimo di 8 a un massimo di 253 minuti, suggerendo una vasta gamma di lunghezze. L'intervallo interquartile è di 28 minuti, indicando che il 50% **centrale** dei film ha una durata compresa tra 86 e 114 minuti. La deviazione standerd è di circa 25.96 minuti, suggerendo una moderata dispersione dei dati intorno alla media. Infine, la varianza è di circa 673.95, indicando la quantità di dispersione dei dati rispetto alla media, elevata al quadrato.
 
 `> data.1 <- data %>% distinct(show_id, .keep_all = TRUE)`
 
@@ -66,7 +66,8 @@ La durata dei film nel Dataset presenta una distribuzione abbastanza uniforme, c
    select(duration) %>%
    pull() %>%
    mean()`
-![image](/assets/densityplot.png)
+
+![image](/assets/histogram.png)
 
 Il codice analizza la durata dei film presenti nel dataset, calcolandone la durata media in minuti. Questo ci da un'idea della lunghezza tipica dei film nel Dataset. Il grafico ci aiuta a vedere come le durate dei film sono distribuite su valori diversi. Questo potrebbe dirci se la maggior parte dei film ha durate simili o se c'è un'ampio range.
 
@@ -146,3 +147,21 @@ Table: Top 30 TV Show Genres
 |TV Horror                    |  1|
 
 I dati mostrano una panoramica dei generi di programmi TV più popolari presenti nel dataset. 'Programmi TV Internazionali' dominano la lista con 44 titoli, seguiti da 'Programmi TV Crimine' con 32 titoli. 'Programmi TV Britannici', 'Serie Anime' e 'Programmi TV per Bambini' si collocano anche tra i primi posti della classifica con 20, 10 e 10 titoli rispettivamente. Altri generi rappresentati includono 'Commedie Stand-Up e Talk Show', 'Docuserie' e 'Programmi TV d'Azione e Avventura'. Alcuni generi come 'TV Drammi', 'TV Horror' e 'TV Romantici' sono meno rappresentati, ognuno con solo un titolo. Questa varietà di generi televisivi offre agli spettatori una vasta gamma di opzioni, dalle serie internazionali ai programmi per bambini, garantendo una varietà di intrattenimento adatta a diversi gusti e interessi.
+
+# Grafico a Barre - Frequenza dei contenuti per anno
+
+![image](/assets/barplot5.png)
+
+La maggior parte dei contenuti nel dataset sono stati pubblicati negli anni recenti, con un picco significativo a partire dal 2000. Il numero di pubblicazioni per anno aumenta costantemente fino a raggiungere il massimo nel periodo tra il 2015 e il 2020, dove la frequenza supera i 600 titoli all'anno. Dopo il 2020, si nota una leggera diminuzione nel numero di nuovi contenuti. Questa tendenza suggerisce un'espansione rapida e recente della libreria di contenuti di Netflix, con un focus crescente su produzioni recenti.
+
+# Frequenza dei Rating
+
+![image](/assets/barplot7.png)
+
+La maggior parte dei contenuti nel dataset è classificata come TV-MA, con oltre 1500 titoli, seguita da TV-14 con più di 1000 titoli. Le categorie R e PG-13 presentano un numero significativo di contenuti, rispettivamente con circa 700 e 500 titoli. Le fasce d'età TV-PG e PG contano meno di 500 titoli ciascuna. Le categorie meno rappresentate includono TV-G, TV-Y, TV-Y7, NR, G, TV-Y7-FV, UR, NC-17, e la categoria non classificata, ciascuna con meno di 100 titoli. Questi dati indicano che la maggior parte dei contenuti su Netflix è destinata a un pubblico adulto, mentre i contenuti per bambini e famiglie sono meno rappresentati.
+
+# CORRELAZIONE TRA DURATA DEL FILM E DATA DI USCITA
+
+![image](/assets/dispersione.png)
+
+La maggior parte dei film nel dataset è stata pubblicata dopo l'anno 2000, con una durata che varia principalmente tra 50 e 150 minuti. Le durate dei film più recenti tendono a concentrarsi intorno ai 100 minuti. Prima degli anni '80, c'è una maggiore variazione nelle durate, con alcuni film molto brevi e altri particolarmente lunghi. Dal 2000 in poi, la distribuzione della durata dei film diventa più uniforme, evidenziando una standardizzazione nel tempo di visione. Questo suggerisce che, con il passare degli anni, i film hanno raggiunto una durata più omogenea, mentre in passato c'era una maggiore variabilità.
